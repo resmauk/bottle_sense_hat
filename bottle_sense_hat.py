@@ -7,6 +7,7 @@ from sense_hat import SenseHat
 
 sense = SenseHat()
 sense.clear()
+s = [100,100,100]
 #enable bottle debug
 debug(True)
 
@@ -25,11 +26,26 @@ def html_file(filename):
 
 @route('/action', method='POST')
 def action():
-    val = request.forms.get('strState')
-    on = bool(int(val))
-    if on:
-        sense.clear(255,0,0)
+    r = request.forms.get('rValue')
+    print('DEBUG: red value = ' + str(r))
+    g = request.forms.get('gValue')
+    print('DEBUG: green value = ' + str(g))
+    b = request.forms.get('bValue')
+    print('DEBUG: blue value = ' +str(b))
+    led = request.forms.get('buttonState')    
+    print('DEBUG: led state = ' + str(led))
+    global s
+    
+    on = bool(int(led))
+    print('DEBUG: buttonState = ' + str(on))
+    if on:    
+        s[0] = r
+        s[1] = g
+        s[2] = b
+        print('DEBUG: s = '+ str(s))
+
+        sense.clear(int(s[0]),int(s[1]),int(s[2]))
     else:
-        sense.clear() 
+        sense.clear()
 
 run(host='0.0.0.0', port=8080, reloader=True)
