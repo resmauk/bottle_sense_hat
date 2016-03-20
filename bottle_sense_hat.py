@@ -24,6 +24,22 @@ def rootHome():
 def html_file(filename):
     return static_file(filename, root=rootPath)
 
+@route('/action', method='GET')
+def test():
+    t = sense.temp
+    t = str(int(t))
+    p = sense.pressure
+    p = str(int(p))
+    h = sense.humidity
+    h = str(int(h))
+    data = {}
+    data['temp'] = t
+    data['pressure'] = p
+    data['humidity'] = h
+    json_data = json.dumps(data)
+    return json_data
+    #'temp:'+str(int(temp))+',pressure:'+str(int(pressure))+',humidity:'+str(int(humidity))
+
 @route('/action', method='POST')
 def action():
     r = request.forms.get('rValue')
