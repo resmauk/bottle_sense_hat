@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Bottle Test</title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-    <script>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"  media="screen,projection"/>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script>
         $(document).ready(function() {
 
-            $("#rSlider").on( "slidestop", function() {
-                getValues();
-            });
-            $("#gSlider").on( "slidestop", function() {
-                getValues();
-            });
-            $("#bSlider").on( "slidestop", function() {
-                getValues();
-            });
-            $("#ledSwitch").change(function() {
-                getValues();
-            });
+
+          $("#ledSwitch").change(function() {
+            getValues();
+          });
         });
 
         function getValues() {
@@ -43,40 +36,69 @@
         }
 
     </script>
-</head>
-<body>
 
-<div data-role="page">
 
-	<div data-role="header">
-		<h1>Bottle Test</h1>
-	</div><!-- /header -->
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
 
-	<div data-role="main" class="ui-content">
-                    <h>LED Controls</h>
-                    <form>
-                        <div>
-                            <label for="ledButton">Power</label>
-                            <input type="checkbox" name="ledSwitch" id="ledSwitch" data-role="flipswitch" />
-                        </div>
-                        <div>    
-                            <label for="rSlider">Red Value</label>
-                            <input type="range" name="rSlider" id="rSlider" min="1" max="255" value="255" />
-                        </div>
-                        <div>      
-                            <label for="gSlider">Green Value</label>
-                            <input type="range" name="gSlider" id="gSlider" min="1" max="255" value="255" />
-                        </div>
-                        <div>
-                            <label for="bSlider">Blue Value</label>
-                            <input type="range" name="bSlider" id="bSlider" min="1" max="255" value="255" />
-                        </div>
-                    </form>
-        </div>
-	<div data-role="footer">
-		<h4>Copyright S6C</h4>
-	</div><!-- /footer -->
-</div><!-- /page -->
+    <body>
+        <nav>
+          <div class="nav-wrapper purple lighten-3">
+            <a href="#" class="brand-logo right">Raspberry Pi Sense Hat</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              
+            </ul>
+          </div>
+        </nav>
 
-</body>
-</html>
+        <form>
+
+          <div class="row">
+            <div class="col s12 m6">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">LED Controls</span>
+                  <p>Use this form to control the LEDs on the Sense Hat</p>
+                </div>
+                <div class="card-action">
+                  <div class="row">
+                    <div class="switch">
+                      <h>LEDs</h>
+                      <label>
+                        off
+                        <input type="checkbox" name="ledSwitch" id="ledSwitch" />
+                        <span class="lever"></span>
+                        On
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <h>Red</h>
+                    <p class="range-field">
+                      <input type="range" id="rSlider" name="rSlider" min="47" max="255" value="100" onchange="getValues()" />
+                    </p>
+                  </div>
+                  <div class="row">
+                    <h>Green</h>
+                    <p class="range-field">
+                      <input type="range" id="gSlider" name="gSlider" min="47" max="255" value="100" onchange="getValues()" />
+                    </p>
+                  </div>
+                    <div class="row">
+                    <h>Blue</h>
+                    <p class="range-field">
+                      <input type="range" id="bSlider" name="gSlider" min="47" max="255" value="100" onchange="getValues()" />
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+
+    </body>
+  </html>
