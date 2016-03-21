@@ -24,8 +24,14 @@ def rootHome():
 def html_file(filename):
     return static_file(filename, root=rootPath)
 
-@route('/action', method='GET')
-def test():
+@route('/text', method='POST')
+def getText():
+    text = request.forms.get('texttodisplay')
+    print('DEBGUG: text = ' + str(text))
+    sense.show_message(text)
+
+@route('/setup', method='GET')
+def setup():
     t = sense.temp
     t = str(int(t))
     p = sense.pressure
@@ -40,7 +46,7 @@ def test():
     return json_data
     #'temp:'+str(int(temp))+',pressure:'+str(int(pressure))+',humidity:'+str(int(humidity))
 
-@route('/action', method='POST')
+@route('/led', method='POST')
 def action():
     r = request.forms.get('rValue')
     print('DEBUG: red value = ' + str(r))

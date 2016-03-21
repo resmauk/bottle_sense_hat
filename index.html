@@ -12,9 +12,9 @@
       <script>
         $(document).ready(function() {
 
-            $.get("/action", function(data, status){
-                var d = JSON.parse(data)
-                console.log(d)
+            $.get("/setup", function(data, status){
+                var d = JSON.parse(data);
+                console.log(d);
                 document.getElementById("temp").innerHTML = d['temp'] + ' degrees centigrade';
                 document.getElementById("pressure").innerHTML = d['pressure'] + ' millibars';
                 document.getElementById("humidity").innerHTML = d['humidity'] + ' %';
@@ -23,7 +23,23 @@
             $("#ledSwitch").change(function() {
                 getValues();
             });
+
+            $('#textbutton').click( function () {
+              getText();
+            });
         });
+
+        function getText() {
+          var text = $('#texttodisplay').val();
+          console.log('text = ' + text)
+
+          $.ajax({
+            url: '/text',
+            type: 'POST',
+            data:{texttodisplay:text}
+          });
+
+        }
 
         function getValues() {
             var rValue = $('#rSlider').val();
@@ -36,7 +52,7 @@
             console.log('isChecked = ' + isChecked);
 
             $.ajax({
-                url: '/action',
+                url: '/led',
                 type: 'POST',
                 data: { rValue:rValue, gValue:gValue, bValue:bValue, buttonState:isChecked}
             });
@@ -123,8 +139,27 @@
                 </div>
                 </div>
               </div>
-          </div>
 
+            <div class="col s12 m6">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Sensor Hat Text</span>
+                  </div>
+                  <div class="card-action">
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                      <input placeholder="Enter text to display" id="texttodisplay" type="text" class="validate">
+                      <label for="texttodisplay">Text to display on the Sensor Hat</label>
+                    </div>
+                    <div class="row">
+                      <button class="btn waves-effect waves-light" type="submit" id="textbutton" name="textbutton">Submit<i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
         </form>
 
 
